@@ -1,0 +1,9 @@
+.card{
+    background-color: rgb(38, 38, 38);
+    width: 17%;
+    display: flex;
+    justify-content: center;
+    &__container{
+        width: 90%;
+    }
+}

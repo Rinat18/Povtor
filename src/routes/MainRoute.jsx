@@ -1,11 +1,11 @@
 import React from 'react';
-import LoginPage from '../pages/LoginPage';
 import HomePage from '../pages/HomePage';
 import { Route, Routes } from 'react-router-dom';
+import StorePage from '../pages/StorePage/StorePage';
 
 const MainRoute = () => {
     const NOT_AUTH = [
-        {link: "/", element: <LoginPage />}
+        {link: "/", element: <StorePage />}
     ]
     const ACTIVE_USER = [
         {link: "/", element: <HomePage />},
@@ -13,15 +13,13 @@ const MainRoute = () => {
         // {link: "/", element: <HomePage />},
         // {link: "/", element: <HomePage />},
         // {link: "/", element: <HomePage />},
-
-        
-    ]
+    ];
     const ADMIN = [
-
+        
     ]
     return (
         <Routes>
-            {ACTIVE_USER.map((elem) => (
+            {NOT_AUTH.map((elem) => (
                 <Route key={elem.id} path={elem.link} element={elem.element} />
             ))}
         </Routes>
