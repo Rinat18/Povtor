@@ -5,7 +5,11 @@ import StorePage from '../pages/StorePage/StorePage';
 
 const MainRoute = () => {
     const NOT_AUTH = [
-        {link: "/", element: <StorePage />}
+        {link: "/store", element: <StorePage />},
+        {link: "/", element: <HomePage />},
+        // {link: "/", element: <StorePage />},
+        // {link: "/", element: <StorePage />},
+        // {link: "/", element: <StorePage />},
     ]
     const ACTIVE_USER = [
         {link: "/", element: <HomePage />},

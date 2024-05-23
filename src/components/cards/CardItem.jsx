@@ -2,7 +2,6 @@ import React from 'react';
 import "./CardsStyle.scss"
 
 const CardItem = ({card}) => {
-  console.log(card);
   return (
     <div className='card'>
       <div className="card__container">

@@ -6,7 +6,8 @@ const cardsContext = createContext()
 export const useCards = () => useContext(cardsContext)
 const INIT_STATE = {
     cards: [],
-    oneCard: {}
+    oneCard: {},
+    ranks:[],
 }
 const reducer = (state = INIT_STATE, action) => {
     switch (action.type){
@@ -14,6 +15,8 @@ const reducer = (state = INIT_STATE, action) => {
             return {...state, cards:action.payload};
         case CARDS_ACTIONS.GET_ONE_CARD:
             return {...state, oneCard:action.payload};
+        case CARDS_ACTIONS.GET_RANK:
+            return {...state, ranks:action.payload};
     }
 }
 
@@ -24,7 +27,7 @@ const CardsContext = ({children}) => {
     // ! GET CARDS
     const getAllCards = async() => {
         try{
-            const {data} = await axios(`${API}/cards`)
+            const {data} = await axios(`${API}/cards/${window.location.search}`)
             dispatch({
                 type: CARDS_ACTIONS.GET_CARDS,
                 payload: data,
@@ -45,10 +48,30 @@ const CardsContext = ({children}) => {
             console.log(error);
         }
     }
+    // ! GET CATEGORY
+    const getCategoryCard = async() => {
+        try{
+            const {data} = await axios(`${API}/cards`)
+            const filtered =  data.map((elem) => {
+                if(elem.rank){
+                    return elem.rank
+                }
+            })
+            const uniqueArray = [...new Set(filtered)];
+            dispatch({
+                type: CARDS_ACTIONS.GET_RANK,
+                payload: uniqueArray,
+              });
+        }catch(error){
+            console.log(error);
+        }
+    }
 
     const values = {
         getAllCards,
         getOneCard,
+        getCategoryCard,
+        ranks: state.ranks,
         cards: state.cards,
         oneCard: state.oneCard,
     }

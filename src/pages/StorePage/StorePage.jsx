@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./StorePage.css";
 import CardsList from "../../components/cards/CardsList";
+import CardsFilter from "../../components/cards/CardsFilter/CardsFilter";
+import { useSearchParams } from "react-router-dom";
 
 
 const StorePage = () => {
+  const [rank , setRank] = useState("all")
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState("");
+
+  
+  useEffect(() => {
+    setSearchParams({
+      search,
+      rank,
+    });
+  }, [rank, search]);
+
 
   return (
     <div className="StoreMain">
@@ -35,7 +49,7 @@ const StorePage = () => {
             >
               Фильтрация
             </p>
-            {/* <CardsFilter /> */}
+            <CardsFilter />
           </div>
           <div style={{ marginBottom: "10px" }}>
             <p
